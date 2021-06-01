@@ -6,6 +6,7 @@ import guru.springfamework.bootstrap.BootStrap;
 import guru.springfamework.domain.Customer;
 import guru.springfamework.repositories.CategoryRepository;
 import guru.springfamework.repositories.CustomerRepository;
+import guru.springfamework.repositories.VendorRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,11 +31,13 @@ public class CustomerServiceImplIT {
     CustomerRepository customerRepository;
     @Autowired
     CategoryRepository categoryRepository;
+    @Autowired
+    VendorRepository vendorRepository;
     @Before
     public void setUp() throws Exception {
         System.out.println("Loading Customer Data: ");
         System.out.println(customerRepository.findAll().size());
-        BootStrap bootStrap = new BootStrap(categoryRepository,customerRepository);
+        BootStrap bootStrap = new BootStrap(categoryRepository,customerRepository,vendorRepository);
         bootStrap.run(); //load data
         customerService = new CustomerServiceImpl(customerRepository, CustomerMapper.INSTANCE);
     }
