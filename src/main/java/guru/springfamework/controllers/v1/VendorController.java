@@ -4,9 +4,12 @@ import guru.springfamework.api.v1.model.VendorDTO;
 import guru.springfamework.api.v1.model.VendorListDTO;
 import guru.springfamework.domain.Vendor;
 import guru.springfamework.services.VendorService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+@Api(produces = "Vendor API")
 @RestController
 @RequestMapping(VendorController.BASE_URL)
 public class VendorController {
@@ -18,6 +21,7 @@ public class VendorController {
         this.vendorService = vendorService;
     }
 
+    @ApiOperation(value = "Get List of Vendors", notes = "No such point to highlight")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public VendorListDTO getVendors(){
@@ -30,6 +34,7 @@ public class VendorController {
         return vendorService.getVendorById(id);
     }
 
+    @ApiOperation(value = "update Vendors")
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public VendorDTO updateVendor(@PathVariable Long id, @RequestBody VendorDTO vendorDTO){
